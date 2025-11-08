@@ -1,0 +1,51 @@
+/**
+ * BASE STYLES
+ * Reset, body, canvas, utility classes
+ */
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	overflow: hidden;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui,
+		sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	touch-action: none; /* Prevent default touch actions */
+	user-select: none; /* Prevent text selection */
+}
+
+#canvas {
+	display: block;
+	width: 100vw;
+	height: 100vh;
+	touch-action: none;
+}
+
+/* Utility Classes */
+.hidden {
+	display: none !important;
+}
+
+.desktop-only {
+	display: block;
+}
+
+.mobile-only {
+	display: none;
+}
+
+/* Responsive visibility */
+@media (max-width: 768px) {
+	.desktop-only {
+		display: none !important;
+	}
+
+	.mobile-only {
+		display: block !important;
+	}
+}

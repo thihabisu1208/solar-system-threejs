@@ -138,3 +138,74 @@ document.getElementById("btn-pause").addEventListener("click", () => {
 document.getElementById("btn-reset").addEventListener("click", () => {
 	resetCamera();
 });
+
+// ============================================
+// MOBILE TOUCH ENHANCEMENTS
+// ============================================
+
+/**
+ * Detect if device is mobile
+ * @returns {boolean} Is mobile device
+ */
+function isMobile() {
+	return (
+		/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+			navigator.userAgent
+		) || window.innerWidth <= 768
+	);
+}
+
+// Adjust controls for mobile
+if (isMobile()) {
+	// Increase damping for smoother mobile experience
+	controls.dampingFactor = 0.08;
+
+	// Enable rotation with one finger
+	controls.enableRotate = true;
+
+	// Disable pan (two-finger drag moves camera, which can be confusing)
+	controls.enablePan = false;
+
+	// Adjust zoom speed for touch
+	controls.zoomSpeed = 0.5;
+
+	console.log("Mobile controls enabled");
+}
+
+// Prevent context menu on long press (mobile)
+window.addEventListener("contextmenu", (e) => {
+	if (isMobile()) {
+		e.preventDefault();
+	}
+});
+
+// Prevent pull-to-refresh on mobile
+let lastTouchY = 0;
+let preventPullToRefresh = false;
+
+document.body.addEventListener(
+	"touchstart",
+	(e) => {
+		if (e.touches.length !== 1) return;
+		lastTouchY = e.touches[0].clientY;
+		preventPullToRefresh = window.pageYOffset === 0;
+	},
+	{ passive: false }
+);
+
+document.body.addEventListener(
+	"touchmove",
+	(e) => {
+		const touchY = e.touches[0].clientY;
+		const touchYDelta = touchY - lastTouchY;
+		lastTouchY = touchY;
+
+		if (preventPullToRefresh) {
+			// Prevent pull-to-refresh when at top and pulling down
+			if (touchYDelta > 0) {
+				e.preventDefault();
+			}
+		}
+	},
+	{ passive: false }
+);

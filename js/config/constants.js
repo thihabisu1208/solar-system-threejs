@@ -213,8 +213,8 @@ export const PLANET_DATA = [
 	},
 ];
 
-export const TRAIL_LENGTH = 100;
-export const TRAIL_OPACITY = 0.6;
+export const TRAIL_LENGTH = 500;
+export const TRAIL_OPACITY = 1;
 
 export const ATMOSPHERE_DATA = {
 	Earth: { color: [0.3, 0.6, 1.0], scale: 1.05 },

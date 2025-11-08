@@ -31,7 +31,14 @@ function easeInOutQuad(t) {
  */
 export function flyToPlanet(planet) {
 	// Check if already animating
-	if (getIsAnimating()) return;
+	const animating = getIsAnimating();
+	if (animating) return;
+
+	// Stop follow mode when flying to planet
+	if (followingPlanet) {
+		followingPlanet = null;
+		console.log("Follow mode disabled");
+	}
 
 	setIsAnimating(true);
 	setPaused(true);
@@ -86,6 +93,7 @@ export function toggleFollowPlanet(planet) {
 	if (followingPlanet === planet) {
 		// Already following this planet, disable follow mode
 		followingPlanet = null;
+		controls.enableDamping = true; // Re-enable damping
 		console.log("Follow mode disabled");
 	} else {
 		// Start following new planet
@@ -104,6 +112,7 @@ export function toggleFollowPlanet(planet) {
 export function updateFollowMode() {
 	if (!followingPlanet) return;
 
+	// Get planet's current world position
 	const planetWorldPos = new THREE.Vector3();
 	followingPlanet.mesh.getWorldPosition(planetWorldPos);
 
@@ -115,13 +124,18 @@ export function updateFollowMode() {
 	const offsetZ = Math.sin(followAngle) * distance;
 	const offsetY = distance * 0.3;
 
+	// Update camera position
 	camera.position.set(
 		planetWorldPos.x + offsetX,
 		planetWorldPos.y + offsetY,
 		planetWorldPos.z + offsetZ
 	);
 
+	// Update controls target
 	controls.target.copy(planetWorldPos);
+
+	// Disable controls damping during follow mode to prevent drift
+	controls.enableDamping = false;
 }
 
 /**

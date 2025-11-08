@@ -1,0 +1,226 @@
+/**
+ * MOBILE STYLES
+ * Responsive overrides for screens below 768px
+ */
+
+@media (max-width: 768px) {
+	/* Top Info Bar - Smaller */
+	#info {
+		top: 10px;
+		padding: 8px 15px;
+		font-size: 12px;
+		max-width: calc(100vw - 80px);
+	}
+
+	/* Help Button - Slightly Smaller */
+	#btn-help {
+		top: 10px;
+		left: 10px;
+		width: 40px;
+		height: 40px;
+		font-size: 20px;
+	}
+
+	/* Speed Display - Move to Top Right */
+	#speed-display {
+		top: 10px;
+		right: 10px;
+		bottom: auto;
+		padding: 8px 15px;
+		font-size: 14px;
+		min-width: 100px;
+	}
+
+	/* Time Display - Move Below Speed */
+	#time-display {
+		top: 60px;
+		right: 10px;
+		padding: 10px 15px;
+		min-width: 100px;
+	}
+
+	#time-label {
+		font-size: 10px;
+	}
+
+	#time-value {
+		font-size: 16px;
+	}
+
+	/* Control Buttons - Larger Touch Targets */
+	#controls {
+		bottom: 15px;
+		gap: 12px;
+	}
+
+	#controls button {
+		width: 55px;
+		height: 55px;
+		font-size: 22px;
+		border-width: 3px;
+	}
+
+	#controls button#btn-reset {
+		font-size: 26px;
+	}
+
+	/* Planet Info Card - Full Width on Small Screens */
+	#planet-info {
+		max-width: calc(100vw - 40px);
+		min-width: auto;
+		width: calc(100vw - 40px);
+		padding: 30px 20px 20px 20px;
+		font-size: 15px;
+	}
+
+	#planet-info h2 {
+		font-size: 26px;
+		margin-bottom: 15px;
+		padding-right: 35px;
+	}
+
+	#planet-info p {
+		margin: 8px 0;
+	}
+
+	#planet-info .fun-fact {
+		margin-top: 15px;
+		padding-top: 15px;
+		font-size: 14px;
+	}
+
+	/* Close Button - Larger on Mobile */
+	#close-planet-info {
+		width: 40px;
+		height: 40px;
+		font-size: 32px;
+	}
+
+	/* Mobile Action Buttons - Larger Touch Targets */
+	.action-btn {
+		padding: 12px 20px;
+		font-size: 15px;
+		max-width: none;
+	}
+
+	/* Help Panel - Full Screen */
+	#help-panel {
+		width: calc(100vw - 20px);
+		max-width: none;
+		min-width: auto;
+		max-height: 85vh;
+		padding: 25px 20px;
+		margin: 10px;
+	}
+
+	#help-panel h3 {
+		font-size: 22px;
+		margin-bottom: 20px;
+	}
+
+	.help-section h4 {
+		font-size: 14px;
+	}
+
+	.help-row {
+		font-size: 13px;
+		flex-wrap: wrap;
+		gap: 5px;
+	}
+
+	.key {
+		min-width: 60px;
+		padding: 4px 10px;
+		font-size: 12px;
+		margin-right: 10px;
+	}
+
+	/* Minimap - Smaller and Repositioned */
+	#minimap {
+		bottom: 90px;
+		right: 10px;
+		width: 140px;
+		height: 140px;
+		padding: 8px;
+	}
+
+	#minimap-label {
+		font-size: 10px;
+		margin-top: 3px;
+	}
+
+	/* Planet Labels - Smaller Text */
+	.planet-label {
+		font-size: 12px;
+	}
+
+	/* Landscape Mode Adjustments */
+	@media (orientation: landscape) and (max-height: 500px) {
+		#time-display {
+			display: none; /* Hide on short landscape screens */
+		}
+
+		#minimap {
+			width: 120px;
+			height: 120px;
+			bottom: 80px;
+		}
+
+		#controls button {
+			width: 50px;
+			height: 50px;
+			font-size: 20px;
+		}
+	}
+}
+
+/* Extra Small Devices (phones under 400px) */
+@media (max-width: 400px) {
+	#info {
+		font-size: 11px;
+		padding: 6px 12px;
+	}
+
+	#controls {
+		gap: 8px;
+	}
+
+	#controls button {
+		width: 50px;
+		height: 50px;
+		font-size: 20px;
+	}
+
+	#planet-info {
+		padding: 20px 15px;
+	}
+
+	#planet-info h2 {
+		font-size: 22px;
+	}
+
+	#help-panel {
+		padding: 20px 15px;
+	}
+
+	#minimap {
+		width: 120px;
+		height: 120px;
+	}
+}
+
+/* Prevent double-tap zoom */
+button,
+a {
+	touch-action: manipulation;
+}
+
+/* Better touch feedback */
+button:active {
+	opacity: 0.7;
+}
+
+/* Smooth scrolling for help panel on mobile */
+#help-panel {
+	-webkit-overflow-scrolling: touch;
+}

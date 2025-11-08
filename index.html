@@ -4,59 +4,89 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Solar System</title>
-		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" href="css/base.css" />
+		<link rel="stylesheet" href="css/ui-controls.css" />
+		<link rel="stylesheet" href="css/info-panels.css" />
+		<link rel="stylesheet" href="css/minimap.css" />
+		<link rel="stylesheet" href="css/labels.css" />
+		<link rel="stylesheet" href="css/mobile.css" />
 	</head>
 	<body>
 		<canvas id="canvas"></canvas>
 
-		<div id="minimap">
-			<canvas id="minimap-canvas"></canvas>
-			<div id="minimap-label">Solar System Map</div>
+		<!-- Top Info Bar -->
+		<div id="info">
+			<span class="desktop-only">Press ? for help | </span>Click planets | Drag
+			to rotate
 		</div>
 
+		<!-- Help Button -->
+		<button id="btn-help" title="Keyboard Shortcuts (H)" aria-label="Help">
+			?
+		</button>
+
+		<!-- Speed Display -->
+		<div id="speed-display">Speed: 1.0x</div>
+
+		<!-- Time Display -->
 		<div id="time-display">
 			<div id="time-label">Simulation Time</div>
 			<div id="time-value">Day 0</div>
 		</div>
 
-		<div id="info">
-			Click planets | Drag rotate | +/- speed | Space pause | O orbits | S scale
-			| R reset
+		<!-- Control Buttons -->
+		<div id="controls">
+			<button id="btn-slower" title="Slow Down (-)" aria-label="Slower">
+				−
+			</button>
+			<button id="btn-pause" title="Pause (Space)" aria-label="Pause">⏸</button>
+			<button id="btn-faster" title="Speed Up (+)" aria-label="Faster">
+				+
+			</button>
+			<button id="btn-reset" title="Reset Camera (R)" aria-label="Reset">
+				⌂
+			</button>
 		</div>
 
-		<div id="speed-display">Speed: 1.0x</div>
-
+		<!-- Planet Info Card -->
 		<div id="planet-info" class="hidden"></div>
 
-		<div id="controls">
-			<button id="btn-slower" title="Slow Down (-)">−</button>
-			<button id="btn-pause" title="Pause (Space)">⏸</button>
-			<button id="btn-faster" title="Speed Up (+)">+</button>
-			<button id="btn-reset" title="Reset Camera (R)">⌂</button>
+		<!-- Help Panel -->
+		<div id="help-panel" class="hidden">
+			<h3>Controls</h3>
+			<div class="help-section desktop-only">
+				<h4>Mouse</h4>
+				<div class="help-row"><span class="key">Click</span> Select Planet</div>
+				<div class="help-row"><span class="key">Drag</span> Rotate View</div>
+				<div class="help-row"><span class="key">Scroll</span> Zoom In/Out</div>
+			</div>
+			<div class="help-section mobile-only">
+				<h4>Touch</h4>
+				<div class="help-row"><span class="key">Tap</span> Select Planet</div>
+				<div class="help-row"><span class="key">Drag</span> Rotate View</div>
+				<div class="help-row"><span class="key">Pinch</span> Zoom In/Out</div>
+			</div>
+			<div class="help-section desktop-only">
+				<h4>Keyboard</h4>
+				<div class="help-row"><span class="key">Space</span> Pause/Resume</div>
+				<div class="help-row"><span class="key">+/-</span> Speed Control</div>
+				<div class="help-row"><span class="key">F</span> Follow Planet</div>
+				<div class="help-row"><span class="key">O</span> Toggle Orbits</div>
+				<div class="help-row"><span class="key">S</span> Toggle Scale</div>
+				<div class="help-row"><span class="key">T</span> Toggle Trails</div>
+				<div class="help-row">
+					<span class="key">C</span> Toggle Constellations
+				</div>
+				<div class="help-row"><span class="key">R</span> Reset Camera</div>
+				<div class="help-row"><span class="key">H/ESC</span> Toggle Help</div>
+			</div>
+			<div class="help-close">Tap anywhere to close</div>
 		</div>
 
-		<div id="stats">FPS: 60</div>
-
-		<button id="btn-help" title="Keyboard Shortcuts (H)">?</button>
-
-		<div id="help-panel" class="hidden">
-			<h3>Keyboard Shortcuts</h3>
-			<div class="help-row"><span class="key">Click</span> Select Planet</div>
-			<div class="help-row"><span class="key">Drag</span> Rotate View</div>
-			<div class="help-row"><span class="key">Scroll</span> Zoom In/Out</div>
-			<div class="help-row"><span class="key">Space</span> Pause/Resume</div>
-			<div class="help-row"><span class="key">+</span> Speed Up</div>
-			<div class="help-row"><span class="key">-</span> Slow Down</div>
-			<div class="help-row"><span class="key">F</span> Follow Planet</div>
-			<div class="help-row"><span class="key">O</span> Toggle Orbits</div>
-			<div class="help-row"><span class="key">S</span> Toggle Scale</div>
-			<div class="help-row"><span class="key">T</span> Toggle Trails</div>
-			<div class="help-row">
-				<span class="key">C</span> Toggle Constellations
-			</div>
-			<div class="help-row"><span class="key">R</span> Reset Camera</div>
-			<div class="help-row"><span class="key">H</span> Toggle This Help</div>
-			<div class="help-close">Press H or ESC to close</div>
+		<!-- Minimap -->
+		<div id="minimap">
+			<canvas id="minimap-canvas"></canvas>
+			<div id="minimap-label">Solar System Map</div>
 		</div>
 
 		<script type="importmap">

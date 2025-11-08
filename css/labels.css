@@ -1,0 +1,16 @@
+/**
+ * PLANET LABELS
+ * Floating text labels above planets
+ */
+
+.planet-label {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui,
+		sans-serif;
+	font-weight: bold;
+	font-size: 14px;
+	color: #4fc3f7;
+	text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
+	pointer-events: none;
+	user-select: none;
+	white-space: nowrap;
+}
