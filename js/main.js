@@ -13,7 +13,7 @@ import { createStarfield, createOrbitLines } from "./objects/environment.js";
 import { initTrails, updateTrail } from "./objects/trails.js";
 import { updateFollowMode } from "./interactions/camera.js";
 import { setupMouseClick, setupMouseMove } from "./interactions/raycaster.js";
-import { initToggles } from "./utils/toggles.js";
+import { initToggles, initHelpPanel } from "./utils/toggles.js";
 import {
 	updateSpeedDisplay,
 	updatePauseButton,
@@ -50,6 +50,7 @@ setupMouseMove(planets);
 
 // Initialize toggles with references
 initToggles(orbitLines, planets);
+initHelpPanel();
 
 // Initialize UI
 updateSpeedDisplay();

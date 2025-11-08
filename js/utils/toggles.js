@@ -55,3 +55,24 @@ export function togglePlanetScale() {
 
 	console.log(`Scale: ${useRealisticScale ? "REALISTIC" : "STYLIZED"}`);
 }
+
+/**
+ * Toggle help panel visibility
+ */
+export function toggleHelpPanel() {
+	const panel = document.getElementById("help-panel");
+	panel.classList.toggle("hidden");
+}
+
+/**
+ * Initialize help panel button listeners
+ */
+export function initHelpPanel() {
+	document.getElementById("btn-help").addEventListener("click", () => {
+		toggleHelpPanel();
+	});
+
+	document.getElementById("help-panel").addEventListener("click", () => {
+		toggleHelpPanel();
+	});
+}

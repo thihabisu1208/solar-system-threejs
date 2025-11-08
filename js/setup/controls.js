@@ -11,7 +11,11 @@ import {
 	MIN_SPEED,
 	MAX_SPEED,
 } from "../config/constants.js";
-import { toggleOrbitLines, togglePlanetScale } from "../utils/toggles.js";
+import {
+	toggleOrbitLines,
+	togglePlanetScale,
+	toggleHelpPanel,
+} from "../utils/toggles.js";
 import { updateSpeedDisplay, updatePauseButton } from "../utils/updates.js";
 import {
 	resetCamera,
@@ -104,6 +108,13 @@ window.addEventListener("keydown", (event) => {
 		toggleTrails();
 	} else if (event.key === "c" || event.key === "C") {
 		toggleConstellations();
+	} else if (event.key === "h" || event.key === "H") {
+		toggleHelpPanel(); // Keep this
+	} else if (event.key === "Escape") {
+		const panel = document.getElementById("help-panel");
+		if (!panel.classList.contains("hidden")) {
+			toggleHelpPanel(); // Keep this
+		}
 	}
 });
 
