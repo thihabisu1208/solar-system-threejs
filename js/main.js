@@ -63,7 +63,17 @@ updatePauseButton();
  * Main animation loop
  * Updates all objects and renders scene every frame
  */
+let lastTime = Date.now();
+let frames = 0;
 function animate() {
+	frames++;
+	const now = Date.now();
+	if (now - lastTime > 1000) {
+		document.getElementById("stats").textContent = `FPS: ${frames}`;
+		frames = 0;
+		lastTime = now;
+	}
+
 	requestAnimationFrame(animate);
 
 	// Rotate sun
