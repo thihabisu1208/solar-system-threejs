@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Solar System</title>
+		<link rel="stylesheet" href="css/style.css" />
+	</head>
+	<body>
+		<canvas id="canvas"></canvas>
+
+		<div id="minimap">
+			<canvas id="minimap-canvas"></canvas>
+			<div id="minimap-label">Solar System Map</div>
+		</div>
+
+		<div id="time-display">
+			<div id="time-label">Simulation Time</div>
+			<div id="time-value">Day 0</div>
+		</div>
+
+		<div id="info">
+			Click planets | Drag rotate | +/- speed | Space pause | O orbits | S scale
+			| R reset
+		</div>
+
+		<div id="speed-display">Speed: 1.0x</div>
+
+		<div id="planet-info" class="hidden"></div>
+
+		<div id="controls">
+			<button id="btn-slower" title="Slow Down (-)">−</button>
+			<button id="btn-pause" title="Pause (Space)">⏸</button>
+			<button id="btn-faster" title="Speed Up (+)">+</button>
+			<button id="btn-reset" title="Reset Camera (R)">⌂</button>
+		</div>
+
+		<script type="importmap">
+			{
+				"imports": {
+					"three": "https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js",
+					"three/addons/": "https://cdn.jsdelivr.net/npm/three@0.169.0/examples/jsm/"
+				}
+			}
+		</script>
+		<script type="module" src="js/main.js"></script>
+	</body>
+</html>

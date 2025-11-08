@@ -1,0 +1,129 @@
+/**
+ * CONTROLS SETUP
+ * OrbitControls and all user input handlers (keyboard, mouse, buttons)
+ */
+
+import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+import { camera, renderer } from "./scene.js";
+import {
+	CONTROLS_DAMPING_FACTOR,
+	SPEED_CHANGE_FACTOR,
+	MIN_SPEED,
+	MAX_SPEED,
+} from "../config/constants.js";
+import { toggleOrbitLines, togglePlanetScale } from "../utils/toggles.js";
+import { updateSpeedDisplay, updatePauseButton } from "../utils/updates.js";
+import {
+	resetCamera,
+	toggleFollowPlanet,
+	getFollowingPlanet,
+} from "../interactions/camera.js";
+import { toggleConstellations } from "../objects/constellations.js";
+import { toggleTrails } from "../objects/trails.js";
+
+// Create orbit controls
+export const controls = new OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true;
+controls.dampingFactor = CONTROLS_DAMPING_FACTOR;
+
+// State variables
+export let speedMultiplier = 1;
+export let isPaused = false;
+
+/**
+ * Set speed multiplier
+ * @param {number} value - New speed value
+ */
+export function setSpeedMultiplier(value) {
+	speedMultiplier = value;
+}
+
+/**
+ * Set pause state
+ * @param {boolean} value - New pause state
+ */
+export function setPaused(value) {
+	isPaused = value;
+}
+
+/**
+ * Get current speed multiplier
+ * @returns {number} Current speed
+ */
+export function getSpeedMultiplier() {
+	return speedMultiplier;
+}
+
+/**
+ * Get current pause state
+ * @returns {boolean} Is paused
+ */
+export function getIsPaused() {
+	return isPaused;
+}
+
+// Keyboard controls
+window.addEventListener("keydown", (event) => {
+	if (event.key === "+" || event.key === "=") {
+		speedMultiplier = Math.min(
+			speedMultiplier * SPEED_CHANGE_FACTOR,
+			MAX_SPEED
+		);
+		updateSpeedDisplay();
+	} else if (event.key === "-" || event.key === "_") {
+		speedMultiplier = Math.max(
+			speedMultiplier / SPEED_CHANGE_FACTOR,
+			MIN_SPEED
+		);
+		updateSpeedDisplay();
+	} else if (event.key === " ") {
+		event.preventDefault();
+		isPaused = !isPaused;
+		updateSpeedDisplay();
+		updatePauseButton();
+	} else if (event.key === "o" || event.key === "O") {
+		toggleOrbitLines();
+	} else if (event.key === "r" || event.key === "R") {
+		resetCamera();
+	} else if (event.key === "s" || event.key === "S") {
+		togglePlanetScale();
+	} else if (event.key === "f" || event.key === "F") {
+		const currentlyFollowing = getFollowingPlanet();
+		if (currentlyFollowing) {
+			// Stop following
+			toggleFollowPlanet(null);
+		} else {
+			// Start following last clicked planet if exists
+			if (window.lastClickedPlanet) {
+				toggleFollowPlanet(window.lastClickedPlanet);
+			} else {
+				console.log("Click a planet first, then press F to follow it");
+			}
+		}
+	} else if (event.key === "t" || event.key === "T") {
+		toggleTrails();
+	} else if (event.key === "c" || event.key === "C") {
+		toggleConstellations();
+	}
+});
+
+// Button controls
+document.getElementById("btn-slower").addEventListener("click", () => {
+	speedMultiplier = Math.max(speedMultiplier / SPEED_CHANGE_FACTOR, MIN_SPEED);
+	updateSpeedDisplay();
+});
+
+document.getElementById("btn-faster").addEventListener("click", () => {
+	speedMultiplier = Math.min(speedMultiplier * SPEED_CHANGE_FACTOR, MAX_SPEED);
+	updateSpeedDisplay();
+});
+
+document.getElementById("btn-pause").addEventListener("click", () => {
+	isPaused = !isPaused;
+	updateSpeedDisplay();
+	updatePauseButton();
+});
+
+document.getElementById("btn-reset").addEventListener("click", () => {
+	resetCamera();
+});
